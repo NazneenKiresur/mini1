@@ -1,14 +1,34 @@
-function fetchdata(){
-    const options = {
-        method: 'GET',
-        headers: {
-            'X-RapidAPI-Host': 'eventbrite-com.p.rapidapi.com',
-            'X-RapidAPI-Key': '5767edf29emsh7af85cad24fd077p154852jsn2e7d5a71b4f6'
-        }
-    };
-    
-    fetch('https://eventbrite-com.p.rapidapi.com/event/117496833191', options)
-        .then(response => response.json())
-        .then(response => console.log(response))
-        .catch(err => console.error(err));
+async function fetchEvents() {
+  const data = await fetch("https://events-api.qwertyreboot.repl.co/event/all");
+  const events = await data.json();
+  console.log(events);
+
+  displayEvents();
+
 }
+
+
+    function displayEvents(data){
+      const main = document.getElementById("flexible");
+
+      const el = document.createElement('div');
+      const eventname=document.createElement('h2');
+      const image = document.createElement('img');
+      const text = document.createElement('p');
+      
+      eventname.innerHTML=`${data.title}`;
+     
+      image.src = `${data.image}`;
+      text.innerHTML = `${data.startDate}`;
+      el.appendChild(eventname);
+      el.appendChild(image);
+      el.appendChild(text);
+      main.appendChild(el);
+    }
+
+
+function linking(){
+  window.location.href="./register.html"
+}
+
+
